@@ -12,6 +12,13 @@ data class Movies(
     val results: List<Result>
 ) {
     companion object {
+        val initial = Movies(
+            entries = 0,
+            next = "",
+            page = -1,
+            results = listOf()
+        )
+
         fun MoviesNetwork.toMovies() = Movies(
             entries = this.entries,
             next = this.next,

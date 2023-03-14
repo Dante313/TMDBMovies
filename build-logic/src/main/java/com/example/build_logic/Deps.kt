@@ -11,6 +11,8 @@ object Deps {
         const val uiToolingPreview = "androidx.compose.ui:ui-tooling-preview:$version"
         const val material3 = "androidx.compose.material3:material3:1.1.0-alpha08"
 
+        const val navigation = "androidx.navigation:navigation-compose:2.5.3"
+
         const val uiTestJUnit4 = "androidx.compose.ui:ui-test-junit4:$version"
         const val uiTooling = "androidx.compose.ui:ui-tooling:$version"
         const val uiTestManifest = "androidx.compose.ui:ui-test-manifest:$version"
