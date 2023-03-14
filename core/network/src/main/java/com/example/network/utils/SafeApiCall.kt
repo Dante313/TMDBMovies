@@ -1,4 +1,4 @@
-package com.example.network
+package com.example.network.utils
 
 import kotlin.coroutines.cancellation.CancellationException
 import retrofit2.HttpException
@@ -13,15 +13,15 @@ suspend fun <T : Any> safeApiCall(
         if (body != null) {
             Either.Success(body)
         } else {
-            Either.Failure(IOException("Empty body"))
+            Either.Failure<Any>(IOException("Empty body"))
         }
     } else {
-        Either.Failure(IOException("Failed to read response, error code [${response.code()}]"))
+        Either.Failure<Any>(IOException("Failed to read response, error code [${response.code()}]"))
     }
 } catch (ex: CancellationException) {
     throw ex
 } catch (ex: HttpException) {
-    Either.Failure(ex)
+    Either.Failure<Any>(ex)
 } catch (ex: IOException) {
-    Either.Failure(ex)
+    Either.Failure<Any>(ex)
 }

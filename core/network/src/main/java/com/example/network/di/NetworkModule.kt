@@ -1,5 +1,6 @@
-package com.example.network
+package com.example.network.di
 
+import com.example.network.RapidMoviesApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -78,6 +79,10 @@ internal object NetworkModule {
         .addConverterFactory(json.asConverterFactory(MediaType.toMediaType()))
         .client(okHttpClient)
         .build()
+
+    @Provides
+    @Singleton
+    fun provideRapidMoviesApi(retrofit: Retrofit): RapidMoviesApi = retrofit.create(RapidMoviesApi::class.java)
 }
 
 @Qualifier

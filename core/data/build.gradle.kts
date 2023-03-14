@@ -3,11 +3,10 @@ import com.example.build_logic.Deps
 plugins {
     id("movies.android.library")
     id("movies.android.hilt")
-    id("kotlinx-serialization")
 }
 
 android {
-    namespace = "com.example.network"
+    namespace = "com.example.data"
 
     buildTypes {
         release {
@@ -21,8 +20,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:network"))
+
     implementation(Deps.Network.retrofit)
-    implementation(Deps.Network.loggingInterceptor)
-    implementation(Deps.Network.serializationConverter)
-    implementation(Deps.Network.serializationJson)
+    implementation(Deps.Coroutines.android)
+    implementation(Deps.Coroutines.core)
 }
