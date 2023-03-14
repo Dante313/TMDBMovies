@@ -21,6 +21,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             dependencies {
                 "implementation"(Deps.Common.coreKtx)
                 "implementation"(Deps.Common.lifecycleRuntimeKtx)
+                "implementation"(Deps.Common.logCat)
             }
         }
     }

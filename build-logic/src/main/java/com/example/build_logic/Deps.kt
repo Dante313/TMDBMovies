@@ -37,4 +37,11 @@ object Deps {
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
     }
+
+    object Network {
+        const val retrofit= "com.squareup.retrofit2:retrofit:2.9.0"
+        const val serializationJson = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"
+        const val serializationConverter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+        const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:4.10.0"
+    }
 }
