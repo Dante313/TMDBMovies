@@ -23,5 +23,17 @@ gradlePlugin {
             id = "movies.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
+        register("androidHilt") {
+            id = "movies.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
+        }
+        register("androidApplicationCompose") {
+            id = "movies.android.application.compose"
+            implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
+        register("androidLibraryCompose") {
+            id = "movies.android.library.compose"
+            implementationClass = "AndroidLibraryComposeConventionPlugin"
+        }
     }
 }

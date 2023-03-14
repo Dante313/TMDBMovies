@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "TMDBMovies"
 include(":app")
+include(":presentation:shared:mvi")
