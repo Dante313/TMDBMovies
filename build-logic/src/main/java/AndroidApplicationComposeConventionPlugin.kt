@@ -9,8 +9,8 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
         with(target) {
             pluginManager.apply("com.android.application")
 
-            val extensions = extensions.getByType<ApplicationExtension>()
-            configureAndroidCompose(extensions)
+            val extension = extensions.getByType<ApplicationExtension>()
+            configureAndroidCompose(extension)
         }
     }
 }

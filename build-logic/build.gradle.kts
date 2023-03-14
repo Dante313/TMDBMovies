@@ -23,6 +23,14 @@ gradlePlugin {
             id = "movies.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
+        register("androidLibrary") {
+            id = "movies.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
+        register("kotlinLibrary") {
+            id = "movies.kotlin.library"
+            implementationClass = "KotlinLibraryConventionPlugin"
+        }
         register("androidHilt") {
             id = "movies.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"

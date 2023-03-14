@@ -2,11 +2,11 @@ import com.example.build_logic.Deps
 
 plugins {
     id("movies.android.library")
-    id("movies.android.library.compose")
+    id("movies.android.hilt")
 }
 
 android {
-    namespace = "com.example.mvi"
+    namespace = "com.example.coroutines"
 
     buildTypes {
         release {
@@ -20,7 +20,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:coroutines"))
     implementation(project(":core:dispatchers"))
 
     implementation(Deps.Coroutines.android)

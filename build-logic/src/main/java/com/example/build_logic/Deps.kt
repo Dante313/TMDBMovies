@@ -23,4 +23,18 @@ object Deps {
         const val compiler = "com.google.dagger:hilt-compiler:$version"
         const val navigation = "'androidx.hilt:hilt-navigation-compose:1.0.0'"
     }
+
+    object Common {
+        const val coreKtx = "androidx.core:core-ktx:1.7.0"
+        const val logCat = "com.squareup.logcat:logcat:0.1"
+        const val immutableCollections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5"
+        const val lifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+    }
+
+    object Coroutines {
+        private const val version = "1.7.0-Beta"
+
+        const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
+        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
+    }
 }
