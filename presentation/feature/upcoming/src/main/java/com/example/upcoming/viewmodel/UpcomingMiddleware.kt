@@ -14,22 +14,17 @@ internal class UpcomingMiddleware @Inject constructor(
 
     override fun process(state: UpcomingState, action: UpcomingAction) {
         when (action) {
-            UpcomingAction.Loading -> {
+            UpcomingAction.Load -> {
                 scope.launch {
                     loadUpcomingMovies()
                 }
-            }
-            UpcomingAction.Retry -> {
-                dispatch(UpcomingAction.Loading)
-//                scope.launch {
-//                    loadUpcomingMovies()
-//                }
             }
             else -> Unit
         }
     }
 
     private suspend fun loadUpcomingMovies() {
+        dispatch(UpcomingAction.Loading)
         moviesRepository.getUpcomingMovies().fold(
             onSuccess = { movies ->
                 if (movies.movies.isEmpty()) {

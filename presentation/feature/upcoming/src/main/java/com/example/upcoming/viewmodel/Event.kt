@@ -33,7 +33,7 @@ internal sealed interface UpcomingAction : Action {
 
     data class LoadError(val message: String) : UpcomingAction
 
-    object Retry : UpcomingAction
+    object Load : UpcomingAction
 
     data class NoResults(val message: String) : UpcomingAction
 }

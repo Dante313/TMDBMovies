@@ -9,9 +9,6 @@ internal class UpcomingReducer @Inject constructor() : Reducer<UpcomingState, Up
         is UpcomingAction.Loading -> state.copy(
             loadState = LoadState.Loading
         )
-        is UpcomingAction.Retry -> state.copy(
-            loadState = LoadState.Loading
-        )
         is UpcomingAction.Loaded -> state.copy(
             loadState = LoadState.Loaded,
             movies = action.movies
@@ -23,5 +20,6 @@ internal class UpcomingReducer @Inject constructor() : Reducer<UpcomingState, Up
         is UpcomingAction.NoResults -> state.copy(
             errorMessage = action.message
         )
+        else -> state
     }
 }

@@ -18,10 +18,6 @@ internal class UpcomingViewModel @Inject constructor(
 ) {
 
     init {
-        handleAction(UpcomingAction.Loading)
-    }
-
-    fun retry() {
-        handleAction(UpcomingAction.Retry)
+        handleAction(UpcomingAction.Load)
     }
 }
