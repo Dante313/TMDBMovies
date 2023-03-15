@@ -1,7 +1,7 @@
 package com.example.data.repositories
 
 import com.example.data.models.Movies
-import com.example.network.utils.Either
+import com.example.utils.Either
 
 interface MoviesRepository {
 

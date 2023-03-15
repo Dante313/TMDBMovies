@@ -7,11 +7,6 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-repositories {
-    google()
-    mavenCentral()
-}
-
 dependencies {
     compileOnly("com.android.tools.build:gradle:7.4.2")
     compileOnly("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")

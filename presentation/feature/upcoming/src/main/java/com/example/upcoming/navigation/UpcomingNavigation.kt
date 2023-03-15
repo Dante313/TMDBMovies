@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.example.upcoming.UpcomingScreen
 
 const val upcomingNavigationRoute = "upcoming"
 
@@ -13,6 +14,6 @@ fun NavController.navigateToUpcoming(navOptions: NavOptions?) {
 
 fun NavGraphBuilder.upcomingScreen() {
     composable(route = upcomingNavigationRoute) {
-        // TODO: здесь будет экран фильмов
+        UpcomingScreen()
     }
 }

@@ -1,5 +1,6 @@
-package com.example.network.utils
+package com.example.network
 
+import com.example.utils.Either
 import kotlin.coroutines.cancellation.CancellationException
 import retrofit2.HttpException
 import java.io.IOException

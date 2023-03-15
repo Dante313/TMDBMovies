@@ -3,9 +3,9 @@ package com.example.data.repositories
 import com.example.data.models.Movies
 import com.example.data.models.Movies.Companion.toMovies
 import com.example.network.RapidMoviesApi
-import com.example.network.utils.Either
-import com.example.network.utils.fold
-import com.example.network.utils.safeApiCall
+import com.example.network.safeApiCall
+import com.example.utils.Either
+import com.example.utils.fold
 import javax.inject.Inject
 
 class MoviesRepositoryImpl @Inject constructor(

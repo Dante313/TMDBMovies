@@ -1,12 +1,10 @@
-import com.example.build_logic.Deps
-
 plugins {
     id("movies.android.library")
     id("movies.android.hilt")
 }
 
 android {
-    namespace = "com.example.data"
+    namespace = "com.example.resourcemanagers"
 
     buildTypes {
         release {
@@ -17,13 +15,4 @@ android {
             )
         }
     }
-}
-
-dependencies {
-    implementation(project(":core:network"))
-    implementation(project(":utils"))
-
-    implementation(Deps.Network.retrofit)
-    implementation(Deps.Coroutines.android)
-    implementation(Deps.Coroutines.core)
 }

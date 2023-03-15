@@ -21,6 +21,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":utils"))
+
     implementation(Deps.Network.retrofit)
     implementation(Deps.Network.loggingInterceptor)
     implementation(Deps.Network.serializationConverter)

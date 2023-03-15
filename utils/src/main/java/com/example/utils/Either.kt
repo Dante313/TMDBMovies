@@ -1,4 +1,4 @@
-package com.example.network.utils
+package com.example.utils
 
 sealed interface Either<out T> {
     class Success<T>(val value: T) : Either<T>
