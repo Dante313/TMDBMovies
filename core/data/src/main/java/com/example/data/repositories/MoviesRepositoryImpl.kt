@@ -13,7 +13,7 @@ class MoviesRepositoryImpl @Inject constructor(
 ) : MoviesRepository {
 
     override suspend fun getUpcomingMovies(): Either<Movies> {
-        return safeApiCall { moviesApi.getUpcomingMovies() }.fold(
+        return safeApiCall { moviesApi.getUpcomingMovies(2, 10) }.fold(
             onSuccess = {
                 Either.Success(it.toMovies())
             },

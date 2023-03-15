@@ -50,4 +50,9 @@ object Deps {
         const val serializationConverter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
         const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:4.10.0"
     }
+
+    object Paging {
+        const val runtime = "androidx.paging:paging-runtime:3.1.1"
+        const val compose = "androidx.paging:paging-compose:1.0.0-alpha18"
+    }
 }

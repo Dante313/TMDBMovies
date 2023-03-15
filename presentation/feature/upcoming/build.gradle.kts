@@ -31,4 +31,6 @@ dependencies {
     implementation(Deps.Compose.navigation)
     implementation(Deps.Compose.lifecycleRuntime)
     implementation(Deps.Compose.coil)
+    implementation(Deps.Paging.runtime)
+    implementation(Deps.Paging.compose)
 }

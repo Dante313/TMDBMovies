@@ -26,4 +26,5 @@ dependencies {
     implementation(Deps.Network.retrofit)
     implementation(Deps.Coroutines.android)
     implementation(Deps.Coroutines.core)
+    implementation(Deps.Paging.runtime)
 }
