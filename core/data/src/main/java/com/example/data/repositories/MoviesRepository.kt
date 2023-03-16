@@ -5,5 +5,5 @@ import com.example.utils.Either
 
 interface MoviesRepository {
 
-    suspend fun getUpcomingMovies(): Either<Movies>
+    suspend fun getUpcomingMovies(page: Int, limit: Int): Either<Movies>
 }

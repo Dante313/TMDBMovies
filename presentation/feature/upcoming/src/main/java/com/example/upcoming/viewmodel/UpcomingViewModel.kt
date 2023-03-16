@@ -18,6 +18,10 @@ internal class UpcomingViewModel @Inject constructor(
 ) {
 
     init {
-        handleAction(UpcomingAction.Load)
+        handleAction(UpcomingAction.LoadFirstPage)
+    }
+
+    fun loadMore(nextPage: Int) {
+        handleAction(UpcomingAction.LoadNewPage(nextPage))
     }
 }

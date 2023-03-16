@@ -3,13 +3,17 @@ package com.example.upcoming
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -27,6 +31,7 @@ import com.example.data.models.Movie
 import com.example.upcoming.viewmodel.LoadState
 import com.example.upcoming.viewmodel.UpcomingState
 import com.example.upcoming.viewmodel.UpcomingViewModel
+import logcat.logcat
 import java.util.*
 
 @Composable
@@ -37,25 +42,45 @@ internal fun UpcomingScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     UpcomingScreen(
-        state = state
+        state = state,
+        onLoadNext = { viewModel.loadMore(it) }
     )
 }
 
 @Composable
 private fun UpcomingScreen(
-    state: UpcomingState
+    state: UpcomingState,
+    onLoadNext: (Int) -> Unit
 ) {
+    val gridState = rememberLazyGridState()
+    val scrollContext = rememberScrollContext(gridState)
+
     when (state.loadState) {
-        LoadState.Loading -> {
+        LoadState.LoadFirstPage -> {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator()
             }
         }
-        LoadState.Loaded -> {
-            LazyVerticalGrid(columns = GridCells.Fixed(2)) {
-                items(count = state.movies.movies.size) { index ->
-                    UpcomingItem(state.movies.movies[index])
+        LoadState.NextPageLoaded -> {
+            Column {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    state = gridState
+                ) {
+                    items(count = state.movies.size) { index ->
+                        UpcomingItem(state.movies[index])
+                    }
                 }
+                // TODO: доработать футер
+                if (state.isLoading) {
+                    Box(modifier = Modifier.weight(1f)) {
+                        CircularProgressIndicator()
+                    }
+                }
+            }
+
+            if (scrollContext.isBottom && state.nextPage != null) {
+                onLoadNext.invoke(state.nextPage)
             }
         }
         LoadState.Error -> {
@@ -65,11 +90,6 @@ private fun UpcomingScreen(
                         Text(text = it)
                     }
                 }
-            }
-        }
-        LoadState.NoResults -> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                state.errorMessage?.let { Text(text = it) }
             }
         }
         else -> Unit
@@ -101,9 +121,11 @@ fun UpcomingItem(movie: Movie, modifier: Modifier = Modifier) {
             )
 
             Box(
-                modifier = Modifier.fillMaxSize().background(
-                    Brush.verticalGradient(listOf(Color.Transparent, Color.Black),)
-                )
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(listOf(Color.Transparent, Color.Black),)
+                    )
             ) {
                 Column(
                     modifier = Modifier.align(Alignment.BottomCenter),
@@ -120,6 +142,30 @@ fun UpcomingItem(movie: Movie, modifier: Modifier = Modifier) {
         }
     }
 }
+
+@Composable
+fun rememberScrollContext(gridState: LazyGridState): ScrollContext {
+    val scrollContext by remember {
+        derivedStateOf {
+            ScrollContext(
+                isTop = gridState.isFirstItemVisible,
+                isBottom = gridState.isLastItemVisible
+            )
+        }
+    }
+    return scrollContext
+}
+
+data class ScrollContext(
+    val isTop: Boolean,
+    val isBottom: Boolean,
+)
+
+val LazyGridState.isLastItemVisible: Boolean
+    get() = layoutInfo.visibleItemsInfo.lastOrNull()?.index == layoutInfo.totalItemsCount - 1
+
+val LazyGridState.isFirstItemVisible: Boolean
+    get() = firstVisibleItemIndex == 0
 
 @Preview(showBackground = true)
 @Composable
