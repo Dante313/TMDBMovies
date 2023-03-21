@@ -1,5 +1,6 @@
 package com.example.network.di
 
+import com.example.network.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,16 +22,14 @@ import javax.inject.Singleton
 private const val OkHttpTag = "OkHttp"
 private const val MediaType = "application/json"
 
-private const val ConnectTimeoutSeconds = 15L
-private const val ReadTimeoutSeconds = 30L
+private const val CONNECT_TIMEOUT_SECONDS = 15L
+private const val READ_TIMEOUT_SECONDS = 30L
 
-private const val HeaderKey = "X-RapidAPI-Key"
-private const val HeaderHost = "X-RapidAPI-Host"
+private const val HEADER_KEY = "X-RapidAPI-Key"
+private const val HEADER_HOST = "X-RapidAPI-Host"
 
-// TODO: move to buildconfig
-private const val key = "0b348d7b70msh67561ff98ccee00p120090jsn9664847ea987"
-private const val host = "moviesdatabase.p.rapidapi.com"
-private const val url = "https://moviesdatabase.p.rapidapi.com/"
+private const val HOST = "moviesdatabase.p.rapidapi.com"
+private const val URL = "https://moviesdatabase.p.rapidapi.com/"
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -44,8 +43,8 @@ internal object NetworkModule {
     fun provideAuthorizationInterceptor(): Interceptor = Interceptor { chain ->
         val original: Request = chain.request()
         val request: Request = original.newBuilder()
-            .header(HeaderKey, key)
-            .header(HeaderHost, host)
+            .header(HEADER_KEY, BuildConfig.API_KEY)
+            .header(HEADER_HOST, HOST)
             .method(original.method, original.body)
             .build()
 
@@ -56,7 +55,7 @@ internal object NetworkModule {
     @Singleton
     @LoggingInterceptor
     fun provideLoggingInterceptor(): Interceptor = HttpLoggingInterceptor { message ->
-        logcat(LogPriority.INFO) { message }
+        logcat(tag = OkHttpTag, priority = LogPriority.INFO) { message }
     }.apply { level = HttpLoggingInterceptor.Level.BODY }
 
     @Provides
@@ -65,8 +64,8 @@ internal object NetworkModule {
         @AuthorizationInterceptor authInterceptor: Interceptor,
         @LoggingInterceptor loggingInterceptor: Interceptor
     ): OkHttpClient = OkHttpClient.Builder()
-        .connectTimeout(ConnectTimeoutSeconds, TimeUnit.SECONDS)
-        .readTimeout(ReadTimeoutSeconds, TimeUnit.SECONDS)
+        .connectTimeout(CONNECT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .readTimeout(READ_TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .addInterceptor(authInterceptor)
         .addInterceptor(loggingInterceptor)
         .build()
@@ -74,7 +73,7 @@ internal object NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl(url)
+        .baseUrl(URL)
         .addConverterFactory(json.asConverterFactory(MediaType.toMediaType()))
         .client(okHttpClient)
         .build()

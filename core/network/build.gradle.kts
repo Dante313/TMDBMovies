@@ -1,4 +1,6 @@
 import com.example.build_logic.Deps
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     id("movies.android.library")
@@ -9,16 +11,22 @@ plugins {
 android {
     namespace = "com.example.network"
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
+    defaultConfig {
+        val propertiesFile = project.rootProject.file("local.properties")
+        val properties = loadSigningProperties(propertiesFile)
+
+        buildConfigField(
+            type = "String",
+            name = "API_KEY",
+            value = properties.getProperty("API_KEY")
+        )
     }
 }
+
+fun loadSigningProperties(file: File) =
+    Properties().apply {
+        load(FileInputStream(file))
+    }
 
 dependencies {
     implementation(project(":utils"))
