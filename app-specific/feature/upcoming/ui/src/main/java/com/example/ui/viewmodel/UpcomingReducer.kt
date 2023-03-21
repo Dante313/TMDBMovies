@@ -1,7 +1,6 @@
 package com.example.ui.viewmodel
 
 import com.example.mvi.Reducer
-import logcat.logcat
 import javax.inject.Inject
 
 internal class UpcomingReducer @Inject constructor() : Reducer<UpcomingState, UpcomingAction> {

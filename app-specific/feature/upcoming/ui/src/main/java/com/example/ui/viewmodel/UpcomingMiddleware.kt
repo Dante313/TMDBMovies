@@ -1,7 +1,6 @@
 package com.example.ui.viewmodel
 
 import com.example.domain.repositories.UpcomingRepository
-import com.example.domain.usecases.GetUpcomingMoviesUseCase
 import com.example.mvi.Middleware
 import com.example.resourcemanagers.lookup.StringLookup
 import com.example.utils.fold

@@ -7,5 +7,5 @@ android {
     namespace = "com.example.upcoming.domain"
 }
 dependencies {
-    implementation(project(":utils"))
+    implementation(project(":shared:utils"))
 }

@@ -33,9 +33,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":presentation:upcoming:ui"))
-    implementation(project(":presentation:upcoming:data"))
-    implementation(project(":presentation:upcoming:domain"))
+    implementation(project(":app-specific:feature:upcoming:ui"))
+    implementation(project(":app-specific:feature:upcoming:data"))
+    implementation(project(":app-specific:feature:upcoming:domain"))
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation(Deps.Hilt.navigation)

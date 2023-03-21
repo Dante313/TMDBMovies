@@ -11,12 +11,12 @@ android {
 }
 
 dependencies {
-    implementation(project(":presentation:shared:mvi"))
-    implementation(project(":presentation:shared:resourcemanagers"))
-    implementation(project(":utils"))
-    implementation(project(":core:coroutines"))
-    implementation(project(":core:network"))
-    implementation(project(":presentation:upcoming:domain"))
+    implementation(project(":shared:feature:mvi"))
+    implementation(project(":shared:feature:resourcemanagers"))
+    implementation(project(":shared:utils"))
+    implementation(project(":shared:core:coroutines"))
+    implementation(project(":shared:core:network"))
+    implementation(project(":app-specific:feature:upcoming:domain"))
 
     implementation(Deps.Hilt.navigation)
     implementation(Deps.Compose.navigation)

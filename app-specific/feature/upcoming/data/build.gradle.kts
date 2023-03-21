@@ -11,9 +11,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:network"))
-    implementation(project(":utils"))
-    implementation(project(":presentation:upcoming:domain"))
+    implementation(project(":shared:core:network"))
+    implementation(project(":shared:utils"))
+    implementation(project(":app-specific:feature:upcoming:domain"))
 
     implementation(Deps.Network.serializationJson)
     implementation(Deps.Network.retrofit)
