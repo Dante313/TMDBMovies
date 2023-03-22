@@ -1,11 +1,15 @@
 package com.example.network
 
-import com.example.utils.Either
-import kotlin.coroutines.cancellation.CancellationException
+import com.example.errors.ErrorEntity
+import com.example.errors.ErrorHandler
+import com.example.models.Either
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
+import kotlin.coroutines.cancellation.CancellationException
 
 suspend fun <T : Any> safeApiCall(
+    errorHandler: ErrorHandler,
     block: suspend () -> retrofit2.Response<T>
 ): Either<T> = try {
     val response = block()
@@ -14,15 +18,19 @@ suspend fun <T : Any> safeApiCall(
         if (body != null) {
             Either.Success(body)
         } else {
-            Either.Failure<Any>(IOException("Empty body"))
+            Either.Failure<Any>(errorHandler.getError(IOException("Empty body")))
         }
     } else {
-        Either.Failure<Any>(IOException("Failed to read response, error code [${response.code()}]"))
+        Either.Failure<Any>(
+            errorHandler.getError(
+                IOException(
+                    "Failed to read response, error code [${response.code()}]"
+                )
+            )
+        )
     }
-} catch (ex: CancellationException) {
-    throw ex
-} catch (ex: HttpException) {
-    Either.Failure<Any>(ex)
-} catch (ex: IOException) {
-    Either.Failure<Any>(ex)
+} catch (ioException: IOException) {
+    Either.Failure<Any>(ErrorEntity.Network())
+} catch (exception: Exception) {
+    Either.Failure<Any>(errorHandler.getError(exception))
 }

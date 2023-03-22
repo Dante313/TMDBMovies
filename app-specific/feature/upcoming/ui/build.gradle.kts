@@ -13,7 +13,6 @@ android {
 dependencies {
     implementation(project(":shared:feature:mvi"))
     implementation(project(":shared:feature:resourcemanagers"))
-    implementation(project(":shared:utils"))
     implementation(project(":shared:core:coroutines"))
     implementation(project(":shared:core:network"))
     implementation(project(":app-specific:feature:upcoming:domain"))

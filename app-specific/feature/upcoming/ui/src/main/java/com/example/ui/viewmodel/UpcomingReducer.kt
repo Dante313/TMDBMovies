@@ -1,5 +1,6 @@
 package com.example.ui.viewmodel
 
+import com.example.errors.ErrorEntity
 import com.example.mvi.Reducer
 import javax.inject.Inject
 
@@ -32,11 +33,20 @@ internal class UpcomingReducer @Inject constructor() : Reducer<UpcomingState, Up
             // Если необходимо загрузить новую страницу - значит "текущая" страница переходит в состояние "следующей"
             state.copy(isLoading = true, currentPage = state.nextPage ?: state.currentPage)
         }
-        is UpcomingAction.LoadError -> state.copy(
-            loadState = LoadState.Error,
-            errorMessage = action.message,
-            isLoading = false
-        )
+        is UpcomingAction.LoadError -> {
+            val errorMessage = when(action.error) {
+                is ErrorEntity.Network -> action.error.msg ?: "No Internet connection :("
+                ErrorEntity.AccessDenied -> "Access denied!"
+                ErrorEntity.ServiceUnavailable -> "Looks like service is not available"
+                ErrorEntity.NotFound -> "Page is not found :("
+                ErrorEntity.Unknown -> "Something went wrong!"
+            }
+            state.copy(
+                loadState = LoadState.Error,
+                errorMessage = errorMessage,
+                isLoading = false
+            )
+        }
         else -> state
     }
 }

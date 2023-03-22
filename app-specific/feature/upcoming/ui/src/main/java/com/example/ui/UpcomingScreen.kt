@@ -173,6 +173,7 @@ fun UpcomingItemPreview() {
     releaseDate.set(1992, 2, 23)
 
     val movie = Movie(
+        id = "1",
         imageUrl = "https://cdn.shazoo.ru/652725_wIpwBgu_mv5bythhmmmyywetn2nkyi00odqxltg1zjctmmjjymqzzjm3y2jixkeyxkfqcgdeqxvynjm5odq2mdk-at-v1-fmjpg-ux1000.jpg",
         releaseDate = releaseDate,
         releaseYear = "1992",

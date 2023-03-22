@@ -19,6 +19,7 @@ data class Movies(
 }
 
 data class Movie(
+    val id: String,
     val imageUrl: String?,
     val releaseDate: Calendar,
     val releaseYear: String,

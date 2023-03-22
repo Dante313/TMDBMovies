@@ -29,7 +29,7 @@ fun loadSigningProperties(file: File) =
     }
 
 dependencies {
-    implementation(project(":shared:utils"))
+    implementation(project(":shared:core:domain:errors"))
 
     implementation(Deps.Network.retrofit)
     implementation(Deps.Network.loggingInterceptor)

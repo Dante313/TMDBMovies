@@ -1,6 +1,7 @@
 package com.example.ui.viewmodel
 
 import com.example.domain.models.Movie
+import com.example.errors.ErrorEntity
 import com.example.mvi.Action
 import com.example.mvi.State
 
@@ -43,5 +44,5 @@ internal sealed interface UpcomingAction : Action {
 
     data class LoadNewPage(val nextPage: Int) : UpcomingAction
 
-    data class LoadError(val message: String) : UpcomingAction
+    data class LoadError(val error: ErrorEntity) : UpcomingAction
 }

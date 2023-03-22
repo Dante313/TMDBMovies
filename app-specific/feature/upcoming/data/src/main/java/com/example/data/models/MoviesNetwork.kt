@@ -50,6 +50,7 @@ data class ResultNetwork(
             }
 
             return Movie(
+                id = this.id,
                 imageUrl = this.primaryImage?.url,
                 releaseDate = releaseCalendarDate,
                 releaseYear = this.releaseYear?.year.toString(),

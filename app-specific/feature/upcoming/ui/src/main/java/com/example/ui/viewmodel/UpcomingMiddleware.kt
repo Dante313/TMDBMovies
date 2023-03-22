@@ -1,15 +1,13 @@
 package com.example.ui.viewmodel
 
-import com.example.domain.repositories.UpcomingRepository
+import com.example.domain.usecases.GetUpcomingMoviesUseCase
+import com.example.models.fold
 import com.example.mvi.Middleware
-import com.example.resourcemanagers.lookup.StringLookup
-import com.example.utils.fold
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 internal class UpcomingMiddleware @Inject constructor(
-    private val upcomingRepository: UpcomingRepository,
-    private val stringLookup: StringLookup
+    private val getUpcomingMoviesUseCase: GetUpcomingMoviesUseCase
 ) : Middleware<UpcomingState, UpcomingAction>() {
 
     override fun process(state: UpcomingState, action: UpcomingAction) {
@@ -30,12 +28,12 @@ internal class UpcomingMiddleware @Inject constructor(
         // Если "текущая" страница состояния равна "следующей" странице экшна - значит она перешла
         // в состояние следующей и нужно её наполнить данными с бэка
         if (nextPage == currentPage) {
-            upcomingRepository.getUpcomingMovies(nextPage, limit).fold(
+            getUpcomingMoviesUseCase(nextPage, limit).fold(
                 onSuccess = { movies ->
                     dispatch(UpcomingAction.NewPageLoaded(movies.movies))
                 },
-                onFailure = {
-                    dispatch(UpcomingAction.LoadError("error"))
+                onFailure = { error ->
+                    dispatch(UpcomingAction.LoadError(error))
                 }
             )
         } else {

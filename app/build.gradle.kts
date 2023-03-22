@@ -36,6 +36,8 @@ dependencies {
     implementation(project(":app-specific:feature:upcoming:ui"))
     implementation(project(":app-specific:feature:upcoming:data"))
     implementation(project(":app-specific:feature:upcoming:domain"))
+    implementation(project(":shared:core:data:errors"))
+
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation(Deps.Hilt.navigation)
